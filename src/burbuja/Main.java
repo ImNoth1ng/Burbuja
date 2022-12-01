@@ -12,6 +12,29 @@ public class Main extends javax.swing.JFrame implements Runnable{
     /**
      * Creates new form Main
      */
+    
+    public static int[] burbuja(int[] A) {
+        int i, j, aux;
+        for (i = 0; i < A.length - 1; i++) {
+            for (j = 0; j < A.length - i - 1; j++) {                                                              
+                if (A[j + 1] < A[j]) {
+                    aux = A[j + 1];
+                    A[j + 1] = A[j];
+                    A[j] = aux;
+                }
+            }
+        }
+        return A;
+    }
+    
+    public static int[] radn(){
+        int[] random =new int[100];
+        for (int i = 0; i < 100; i++) {
+            random[i] = (int) (Math.random()*100);
+        }
+        
+        return random; 
+    }    
     public Main() {
         initComponents();
         h1 = new Thread(this);
@@ -34,7 +57,15 @@ public class Main extends javax.swing.JFrame implements Runnable{
         LbRight = new javax.swing.JLabel();
         PanelDwn = new javax.swing.JPanel();
         btnSalir = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnSalir1 = new javax.swing.JButton();
+        btnOrd = new javax.swing.JButton();
+        btnGen = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txaRdn = new javax.swing.JTextArea();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txaOrd = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(720, 420));
@@ -69,7 +100,7 @@ public class Main extends javax.swing.JFrame implements Runnable{
                 .addComponent(LbLeft)
                 .addGap(258, 258, 258)
                 .addComponent(LbCenter)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 263, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(LbRight)
                 .addGap(49, 49, 49))
         );
@@ -94,6 +125,13 @@ public class Main extends javax.swing.JFrame implements Runnable{
             }
         });
 
+        btnSalir1.setText("Otro");
+        btnSalir1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalir1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelDwnLayout = new javax.swing.GroupLayout(PanelDwn);
         PanelDwn.setLayout(PanelDwnLayout);
         PanelDwnLayout.setHorizontalGroup(
@@ -101,22 +139,79 @@ public class Main extends javax.swing.JFrame implements Runnable{
             .addGroup(PanelDwnLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnSalir)
+                .addGap(18, 18, 18)
+                .addComponent(btnSalir1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PanelDwnLayout.setVerticalGroup(
             PanelDwnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelDwnLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addGroup(PanelDwnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                    .addComponent(btnSalir1, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnOrd.setText("Ordenar Números");
+        btnOrd.setEnabled(false);
+        btnOrd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnOrdActionPerformed(evt);
             }
         });
+
+        btnGen.setText("Generar Números");
+        btnGen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenActionPerformed(evt);
+            }
+        });
+
+        txaRdn.setEditable(false);
+        txaRdn.setColumns(20);
+        txaRdn.setLineWrap(true);
+        txaRdn.setRows(5);
+        jScrollPane1.setViewportView(txaRdn);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        txaOrd.setColumns(20);
+        txaOrd.setLineWrap(true);
+        txaOrd.setRows(5);
+        jScrollPane2.setViewportView(txaOrd);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 798, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout BGLayout = new javax.swing.GroupLayout(BG);
         BG.setLayout(BGLayout);
@@ -125,18 +220,39 @@ public class Main extends javax.swing.JFrame implements Runnable{
             .addComponent(PanelUP, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
             .addComponent(PanelDwn, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
             .addGroup(BGLayout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(BGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(BGLayout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(btnOrd)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(BGLayout.createSequentialGroup()
+                        .addGap(188, 188, 188)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(70, Short.MAX_VALUE))
+            .addGroup(BGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(BGLayout.createSequentialGroup()
+                    .addGap(52, 52, 52)
+                    .addComponent(btnGen)
+                    .addContainerGap(905, Short.MAX_VALUE)))
         );
         BGLayout.setVerticalGroup(
             BGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BGLayout.createSequentialGroup()
                 .addComponent(PanelUP, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(109, 109, 109)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 488, Short.MAX_VALUE)
+                .addGap(122, 122, 122)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                .addGroup(BGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnOrd, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(72, 72, 72)
                 .addComponent(PanelDwn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(BGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(BGLayout.createSequentialGroup()
+                    .addGap(169, 169, 169)
+                    .addComponent(btnGen, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(508, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -157,9 +273,41 @@ public class Main extends javax.swing.JFrame implements Runnable{
       System.exit(0); // TODO add your handling code here:
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnOrdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdActionPerformed
+        int[] aux = new int[100];
+        //aux = burbuja();
+        aux = (burbuja(radn().clone()));
+        String a1;
+        a1 = "" + aux[0];
+        for (int i = 1; i < 100; i++) {
+            a1 = a1 +", " +aux[i];
+        }
+        txaOrd.setText(a1);
+        btnOrd.setEnabled(false);
+        
+        
+    }//GEN-LAST:event_btnOrdActionPerformed
+
+    private void btnGenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenActionPerformed
     
-    }//GEN-LAST:event_jButton1ActionPerformed
+        String aux;
+        int[] a = new int[100];
+        a = radn().clone();
+        aux = "" + a[0];
+        for (int i = 1; i < 100; i++) {
+            aux = aux +", " +a[i];
+        }
+        txaRdn.setText(aux);
+        btnGen.setEnabled(false);
+        btnOrd.setEnabled(true);
+    }//GEN-LAST:event_btnGenActionPerformed
+
+    private void btnSalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalir1ActionPerformed
+        txaRdn.setText("");
+        txaOrd.setText("");
+        btnOrd.setEnabled(false);
+        btnGen.setEnabled(true);
+    }//GEN-LAST:event_btnSalir1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -202,8 +350,16 @@ public class Main extends javax.swing.JFrame implements Runnable{
     private javax.swing.JLabel LbRight;
     private javax.swing.JPanel PanelDwn;
     private javax.swing.JPanel PanelUP;
+    private javax.swing.JButton btnGen;
+    private javax.swing.JButton btnOrd;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnSalir1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea txaOrd;
+    private javax.swing.JTextArea txaRdn;
     // End of variables declaration//GEN-END:variables
 
     @Override
