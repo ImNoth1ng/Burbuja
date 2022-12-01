@@ -34,6 +34,7 @@ public class Main extends javax.swing.JFrame implements Runnable{
         LbRight = new javax.swing.JLabel();
         PanelDwn = new javax.swing.JPanel();
         btnSalir = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(720, 420));
@@ -46,17 +47,17 @@ public class Main extends javax.swing.JFrame implements Runnable{
 
         LbCenter.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         LbCenter.setForeground(new java.awt.Color(0, 0, 0));
-        LbCenter.setText("Estructura de Datos");
+        LbCenter.setText("Burbuja");
         LbCenter.setToolTipText("");
 
         LbLeft.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         LbLeft.setForeground(new java.awt.Color(0, 0, 0));
-        LbLeft.setText("Hora:");
+        LbLeft.setText("Hora: 12:00:00AM");
         LbLeft.setToolTipText("");
 
         LbRight.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         LbRight.setForeground(new java.awt.Color(0, 0, 0));
-        LbRight.setText("Fecha:");
+        LbRight.setText("Fecha:00/00/0000");
         LbRight.setToolTipText("");
 
         javax.swing.GroupLayout PanelUPLayout = new javax.swing.GroupLayout(PanelUP);
@@ -66,9 +67,9 @@ public class Main extends javax.swing.JFrame implements Runnable{
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelUPLayout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addComponent(LbLeft)
-                .addGap(300, 300, 300)
+                .addGap(258, 258, 258)
                 .addComponent(LbCenter)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 350, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 263, Short.MAX_VALUE)
                 .addComponent(LbRight)
                 .addGap(49, 49, 49))
         );
@@ -76,7 +77,7 @@ public class Main extends javax.swing.JFrame implements Runnable{
             PanelUPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelUPLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(PanelUPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(PanelUPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(LbCenter)
                     .addComponent(LbLeft)
                     .addComponent(LbRight))
@@ -110,18 +111,31 @@ public class Main extends javax.swing.JFrame implements Runnable{
                 .addContainerGap())
         );
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout BGLayout = new javax.swing.GroupLayout(BG);
         BG.setLayout(BGLayout);
         BGLayout.setHorizontalGroup(
             BGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(PanelUP, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
             .addComponent(PanelDwn, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
+            .addGroup(BGLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         BGLayout.setVerticalGroup(
             BGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BGLayout.createSequentialGroup()
                 .addComponent(PanelUP, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 620, Short.MAX_VALUE)
+                .addGap(109, 109, 109)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 488, Short.MAX_VALUE)
                 .addComponent(PanelDwn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -142,6 +156,10 @@ public class Main extends javax.swing.JFrame implements Runnable{
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
       System.exit(0); // TODO add your handling code here:
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,6 +192,7 @@ public class Main extends javax.swing.JFrame implements Runnable{
                 new Main().setVisible(true);
             }
         });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -184,12 +203,25 @@ public class Main extends javax.swing.JFrame implements Runnable{
     private javax.swing.JPanel PanelDwn;
     private javax.swing.JPanel PanelUP;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void run() {
         Thread ct= Thread.currentThread();
+        Calendar calendar = new GregorianCalendar();
+        Date fecha = new Date();
         
+        calendar.setTime(fecha);
+        
+        int dia, mes, anio;
+        dia = calendar.get(Calendar.DAY_OF_MONTH);
+        mes = calendar.get(Calendar.MONTH)+1;
+        anio = calendar.get(Calendar.YEAR);
+        
+        
+        
+        LbRight.setText("Fecha: "+dia+"/"+mes+"/"+anio);
         while(ct == h1){
             calcula();
             LbLeft.setText(hora+":"+minutos+":"+segundos+" "+ampm);
